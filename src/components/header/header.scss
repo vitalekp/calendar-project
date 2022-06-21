@@ -1,0 +1,28 @@
+.header {
+  display: flex;
+  height: 70px;
+  padding: 0 48px 10px 48px;
+  align-items: center;
+}
+
+.create-event-btn {
+  &__icon {
+    margin-right: 8px;
+  }
+}
+
+.navigation {
+  &__today-btn {
+    margin-left: 32px;
+    padding: 0 16px;
+  }
+
+  &__nav-icon {
+    font-size: 16px;
+    margin-left: 20px;
+  }
+
+  &__displayed-month {
+    margin-left: 10px;
+  }
+}
