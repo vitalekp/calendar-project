@@ -14,15 +14,19 @@
 .navigation {
   &__today-btn {
     margin-left: 32px;
-    padding: 0 16px;
   }
 
   &__nav-icon {
     font-size: 16px;
     margin-left: 20px;
+    &:nth-child(2) {
+      margin-left: 30px;
+    }
   }
 
   &__displayed-month {
-    margin-left: 10px;
+    font-size: 20px;
+    font-weight: 700;
+    margin-left: 30px;
   }
 }
