@@ -50,7 +50,11 @@ const App = () => {
         month={month}
         updateEvents={updateEvents}
       />
-      <Calendar weekDates={weekDates} events={event} />
+      <Calendar
+        weekDates={weekDates}
+        events={event}
+        updateEvents={updateEvents}
+      />
     </>
   );
 };
