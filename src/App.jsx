@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import moment from "moment";
 import Header from "./components/header/Header.jsx";
 import Calendar from "./components/calendar/Calendar.jsx";
+import events from "./gateway/events";
 
 import { getWeekStartDate, generateWeekRange } from "../src/utils/dateUtils.js";
 
@@ -9,6 +10,11 @@ import "./common.scss";
 
 const App = () => {
   const [weekStartDate, setWeekStartDate] = useState(new Date());
+  const [event, setEvents] = useState(events);
+
+  const updateEvents = (arr) => {
+    setEvents(arr);
+  };
 
   const tooggleWeekHandler = (e) => {
     if (e.target.className === "navigation__today-btn button") {
@@ -39,8 +45,12 @@ const App = () => {
 
   return (
     <>
-      <Header tooggleWeekHandler={tooggleWeekHandler} month={month} />
-      <Calendar weekDates={weekDates} />
+      <Header
+        tooggleWeekHandler={tooggleWeekHandler}
+        month={month}
+        updateEvents={updateEvents}
+      />
+      <Calendar weekDates={weekDates} events={event} />
     </>
   );
 };

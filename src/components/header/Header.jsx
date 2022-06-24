@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import Modal from "../modal/Modal";
 
 import "./header.scss";
@@ -9,25 +9,30 @@ import "./header.scss";
 // 2 state: true
 // 3 render
 
-const Header = ({ tooggleWeekHandler, month }) => {
+const Header = ({ tooggleWeekHandler, month, updateEvents }) => {
   const [modalWindow, setModalWindow] = useState(false);
 
-  const tooggleModalHandler = (e) => {
-    e.preventDefault;
+  const tooggleModalHandler = () => {
+    // e.preventDefault;
 
-    // animation
-    e.target.classList.remove("animate");
-    e.target.classList.add("animate");
-    setTimeout(function () {
-      e.target.classList.remove("animate");
-    }, 700);
+    // // animation
+    // e.target.classList.remove("animate");
+    // e.target.classList.add("animate");
+    // setTimeout(function () {
+    //   e.target.classList.remove("animate");
+    // }, 700);
 
     setModalWindow(!modalWindow);
   };
 
   return (
     <header className="header">
-      {modalWindow && <Modal tooggleModalHandler={tooggleModalHandler} />}
+      {modalWindow && (
+        <Modal
+          tooggleModalHandler={tooggleModalHandler}
+          updateEvents={updateEvents}
+        />
+      )}
       <button className="button create-event-btn" onClick={tooggleModalHandler}>
         <i className="fas fa-plus create-event-btn__icon"></i>Create
       </button>

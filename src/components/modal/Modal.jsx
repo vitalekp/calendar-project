@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import events from "../../gateway/events";
 import moment from "moment";
 
 import "./modal.scss";
@@ -12,8 +13,9 @@ import "./modal.scss";
 // var dateComponent = date.utc().format('YYYY-MM-DD');
 // var timeComponent = date.utc().format('HH:mm:ss');
 
-const Modal = ({ tooggleModalHandler }) => {
-  const [value, setValue] = useState("");
+const Modal = ({ tooggleModalHandler, updateEvents }) => {
+  const [titleValue, setTitleValue] = useState("");
+  const [descriptionValue, setDescriptionValue] = useState("");
   const [dateValue, setDateValue] = useState(
     moment(new Date()).format("YYYY-MM-DD")
   );
@@ -31,19 +33,39 @@ const Modal = ({ tooggleModalHandler }) => {
   };
 
   const startTimeChangeHandler = (e) => {
-    console.log(e.target.value);
     setStartTimeValue(e.target.value);
   };
 
   const endTimeChangeHandler = (e) => {
-    console.log(e.target.value);
     setEndTimeValue(e.target.value);
   };
 
-  const handleChange = (e) => {
-    console.log(e.target.value);
-    setValue(e.target.value);
+  const changeValueHandler = (e) => {
+    e.target.name === "title"
+      ? setTitleValue(e.target.value)
+      : setDescriptionValue(e.target.value);
   };
+
+  const createEventHandler = (e) => {
+    e.preventDefault();
+    const [year, month, day] = dateValue.split("-");
+    const [startHour, startMinute] = startTimeValue.split(":");
+    const [endHour, endMinute] = endTimeValue.split(":");
+    const event = {
+      id: Date.now(),
+      title: titleValue,
+      description: descriptionValue,
+      dateFrom: new Date(year, month - 1, day, startHour, startMinute),
+      dateTo: new Date(year, month - 1, day, endHour, endMinute),
+    };
+
+    events.push(event);
+    const newEvents = events.concat(event);
+
+    updateEvents(newEvents);
+    tooggleModalHandler();
+  };
+
   return (
     <div className="modal overlay">
       <div className="modal__content">
@@ -60,8 +82,8 @@ const Modal = ({ tooggleModalHandler }) => {
               name="title"
               placeholder="Title"
               className="event-form__field"
-              value={value}
-              onChange={handleChange}
+              value={titleValue}
+              onChange={changeValueHandler}
             />
             <div className="event-form__time">
               <input
@@ -91,10 +113,14 @@ const Modal = ({ tooggleModalHandler }) => {
               name="description"
               placeholder="Description"
               className="event-form__field"
-              value={value}
-              onChange={handleChange}
+              value={descriptionValue}
+              onChange={changeValueHandler}
             />
-            <button type="submit" className="event-form__submit-btn">
+            <button
+              type="submit"
+              className="event-form__submit-btn"
+              onClick={createEventHandler}
+            >
               Create
             </button>
           </form>
