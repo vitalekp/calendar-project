@@ -60,7 +60,7 @@ const Modal = ({ tooggleModalHandler, updateEvents }) => {
     };
 
     events.push(event);
-    const newEvents = events.concat(event);
+    const newEvents = events.slice();
 
     updateEvents(newEvents);
     tooggleModalHandler();

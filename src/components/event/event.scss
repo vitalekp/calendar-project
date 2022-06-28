@@ -1,7 +1,7 @@
 .event {
   position: absolute;
   width: 80%;
-  background-color: cornflowerblue;
+  background-color: #6495ed;
   z-index: 1;
   border-radius: 8px;
   padding: 8px;
@@ -17,12 +17,22 @@
 
   &:hover {
     font-weight: bold;
-    background-color: red;
+    background-color: #1561ee;
   }
 }
 
 .delete-event-btn {
   display: block;
   cursor: pointer;
+  border-radius: 10px;
   border: none;
+  margin-top: 5px;
+  padding: 5px 10px;
+  font-size: 16px;
+  font-family: serif;
+  letter-spacing: 1px;
+}
+
+.fa-trash-alt::before {
+  padding-right: 10px;
 }

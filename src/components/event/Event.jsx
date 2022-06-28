@@ -46,7 +46,7 @@ const Event = ({
             <div className="event__time">{time}</div>
             {event.showBtn && (
               <button className="delete-event-btn" onClick={deleteEventHandler}>
-                <i class="fas fa-trash-alt">Delete</i>
+                <i className="fas fa-trash-alt">Delete</i>
               </button>
             )}
           </div>
