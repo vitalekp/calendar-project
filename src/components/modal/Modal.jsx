@@ -52,12 +52,20 @@ const Modal = ({ tooggleModalHandler, updateEvents }) => {
     const [startHour, startMinute] = startTimeValue.split(":");
     const [endHour, endMinute] = endTimeValue.split(":");
     const event = {
-      id: Date.now(),
+      // id: Date.now(),
       title: titleValue,
       description: descriptionValue,
       dateFrom: new Date(year, month - 1, day, startHour, startMinute),
       dateTo: new Date(year, month - 1, day, endHour, endMinute),
     };
+
+    fetch("https://62ac7a419fa81d00a7b2f6c1.mockapi.io/api/v1/events", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(event),
+    });
 
     events.push(event);
     const newEvents = events.slice();
