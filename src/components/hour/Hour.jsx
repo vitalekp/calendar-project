@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import Event from "../event/Event";
 import { formatMins } from "../../../src/utils/dateUtils.js";
@@ -7,10 +7,27 @@ const Hour = ({ dataDay, dataHour, hourEvents, events, updateEvents }) => {
   const isHour = new Date().getHours() === dataHour;
   const isDay = new Date().getDate() === dataDay;
   const line = isHour && isDay;
+  const [isLine, setLine] = useState(line);
+  const [lineStyle, setLineStyle] = useState({
+    marginTop: new Date().getMinutes(),
+  });
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setLine(line);
+      setLineStyle({
+        marginTop: lineStyle.marginTop + 1,
+      });
+    }, 60000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  });
 
   return (
     <div className="calendar__time-slot" data-time={dataHour + 1}>
-      {line && <div className="red-line"></div>}
+      {isLine && <div className="red-line" style={lineStyle}></div>}
       {/* if no events in the current hour nothing will render here */}
       {hourEvents.map(({ id, dateFrom, dateTo, title }) => {
         const eventStart = `${dateFrom.getHours()}:${formatMins(

@@ -3,12 +3,6 @@ import Modal from "../modal/Modal";
 
 import "./header.scss";
 
-// Display correct month in header
-// algo
-// 1 click
-// 2 state: true
-// 3 render
-
 const Header = ({ tooggleWeekHandler, month, updateEvents }) => {
   const [modalWindow, setModalWindow] = useState(false);
 
