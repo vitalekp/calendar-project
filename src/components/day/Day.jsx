@@ -3,7 +3,7 @@ import Hour from "../hour/Hour";
 
 import "./day.scss";
 
-const Day = ({ dataDay, dayEvents, events, updateEvents }) => {
+const Day = ({ dataDay, dayEvents, events, updateEvents, lineTime }) => {
   const hours = Array(24)
     .fill()
     .map((val, index) => index);
@@ -23,6 +23,8 @@ const Day = ({ dataDay, dayEvents, events, updateEvents }) => {
             hourEvents={hourEvents}
             events={events}
             updateEvents={updateEvents}
+            dataDay={dataDay}
+            lineTime={lineTime}
           />
         );
       })}

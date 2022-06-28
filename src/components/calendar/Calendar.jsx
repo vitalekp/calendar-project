@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Navigation from "./../navigation/Navigation";
 import Week from "../week/Week";
@@ -7,6 +7,7 @@ import Sidebar from "../sidebar/Sidebar";
 import "./calendar.scss";
 
 const Calendar = ({ weekDates, events, updateEvents }) => {
+  const [lineTime, setLineTime] = useState(new Date());
   return (
     <section className="calendar">
       <Navigation weekDates={weekDates} />
@@ -17,6 +18,7 @@ const Calendar = ({ weekDates, events, updateEvents }) => {
             weekDates={weekDates}
             events={events}
             updateEvents={updateEvents}
+            lineTime={lineTime}
           />
         </div>
       </div>
