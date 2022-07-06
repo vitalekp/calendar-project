@@ -9,7 +9,7 @@ const Hour = ({ dataDay, dataHour, hourEvents, events, updateEvents }) => {
   const line = isHour && isDay;
   const [isLine, setLine] = useState(line);
   const [lineStyle, setLineStyle] = useState({
-    marginTop: new Date().getMinutes(),
+    marginTop: new Date().getMinutes() - 1,
   });
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const Hour = ({ dataDay, dataHour, hourEvents, events, updateEvents }) => {
     <div className="calendar__time-slot" data-time={dataHour + 1}>
       {isLine && <div className="red-line" style={lineStyle}></div>}
       {/* if no events in the current hour nothing will render here */}
-      {hourEvents.map(({ id, dateFrom, dateTo, title }) => {
+      {hourEvents.map(({ id, dateFrom, dateTo, title, description }) => {
         const eventStart = `${dateFrom.getHours()}:${formatMins(
           dateFrom.getMinutes()
         )}`;
@@ -46,6 +46,7 @@ const Hour = ({ dataDay, dataHour, hourEvents, events, updateEvents }) => {
             marginTop={dateFrom.getMinutes()}
             time={`${eventStart} - ${eventEnd}`}
             title={title}
+            description={description}
             events={events}
             updateEvents={updateEvents}
           />

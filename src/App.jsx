@@ -2,25 +2,18 @@ import React, { useEffect, useState } from "react";
 import moment from "moment";
 import Header from "./components/header/Header.jsx";
 import Calendar from "./components/calendar/Calendar.jsx";
-// import events from "./gateway/events";
+
 import { fetchEventsList } from "./gateway/eventsGateway.js";
-// console.log(events);
 
 import { getWeekStartDate, generateWeekRange } from "../src/utils/dateUtils.js";
 
 import "./common.scss";
 
-const baseUrl = "https://62ac7a419fa81d00a7b2f6c1.mockapi.io/api/v1/events";
-
 const App = () => {
   const [weekStartDate, setWeekStartDate] = useState(new Date());
   const [events, setEvents] = useState([]);
 
-  useEffect(() => {
-    fetchEvents();
-  }, []);
-
-  const fetchEvents = () => {
+  const updateEvents = () => {
     fetchEventsList().then((tasksList) => {
       const tasks = tasksList.map((event) => {
         event.dateFrom = new Date(event.dateFrom);
@@ -31,9 +24,20 @@ const App = () => {
     });
   };
 
-  const updateEvents = (arr) => {
-    setEvents(arr);
-  };
+  useEffect(() => {
+    updateEvents();
+  }, []);
+
+  // const fetchEvents = () => {
+  //   fetchEventsList().then((tasksList) => {
+  //     const tasks = tasksList.map((event) => {
+  //       event.dateFrom = new Date(event.dateFrom);
+  //       event.dateTo = new Date(event.dateTo);
+  //       return event;
+  //     });
+  //     setEvents(tasks);
+  //   });
+  // };
 
   const tooggleWeekHandler = (e) => {
     if (e.target.className === "navigation__today-btn button") {
@@ -79,3 +83,15 @@ const App = () => {
 };
 
 export default App;
+
+// const str = "gs ha frddd";
+
+// const func = (text) => {
+//   let arr = text.split(" ");
+
+//   return arr.map((word) => word[0].toUpperCase() + word.slice(1)).join(" ");
+// };
+
+// const test = func(str);
+
+// console.log(test);

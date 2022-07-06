@@ -11,9 +11,10 @@ const Navigation = ({ weekDates }) => {
           currentDay === dayDate.getDate()
             ? {
                 backgroundColor: "#08284f",
-                borderRadius: "50%",
+                borderRadius: "90%",
                 color: "#fff",
-                padding: "4px",
+                width: "25px",
+                textAlign: "center",
               }
             : { backgroundColor: "none" };
 
