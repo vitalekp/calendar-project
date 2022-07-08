@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { deleteTask } from "../../gateway/eventsGateway";
 
 import "./event.scss";
@@ -50,3 +51,13 @@ const Event = ({ height, marginTop, title, time, id, updateEvents }) => {
 };
 
 export default Event;
+
+Event.propTypes = {
+  events: PropTypes.array,
+  height: PropTypes.number,
+  id: PropTypes.string,
+  marginTop: PropTypes.number,
+  time: PropTypes.string,
+  title: PropTypes.string,
+  updateEvents: PropTypes.func,
+};

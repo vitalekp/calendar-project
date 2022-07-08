@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 
 import Navigation from "./../navigation/Navigation";
 import Week from "../week/Week";
@@ -6,7 +7,7 @@ import Sidebar from "../sidebar/Sidebar";
 
 import "./calendar.scss";
 
-const Calendar = ({ weekDates, events, updateEvents }) => {
+const Calendar = ({ events, weekDates, updateEvents }) => {
   return (
     <section className="calendar">
       <Navigation weekDates={weekDates} />
@@ -25,3 +26,9 @@ const Calendar = ({ weekDates, events, updateEvents }) => {
 };
 
 export default Calendar;
+
+Calendar.propTypes = {
+  events: PropTypes.array,
+  weekDates: PropTypes.array,
+  updateEvents: PropTypes.func,
+};

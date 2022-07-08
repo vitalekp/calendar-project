@@ -1,9 +1,10 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Hour from "../hour/Hour";
 
 import "./day.scss";
 
-const Day = ({ dataDay, dayEvents, events, updateEvents }) => {
+const Day = ({ events, updateEvents, dataDay, dayEvents }) => {
   const hours = Array(24)
     .fill()
     .map((val, index) => index);
@@ -32,3 +33,10 @@ const Day = ({ dataDay, dayEvents, events, updateEvents }) => {
 };
 
 export default Day;
+
+Day.propTypes = {
+  events: PropTypes.array,
+  updateEvents: PropTypes.func,
+  dayEvents: PropTypes.array,
+  dataDay: PropTypes.number,
+};

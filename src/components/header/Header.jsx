@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import Modal from "../modal/Modal";
 
 import "./header.scss";
 
-const Header = ({ tooggleWeekHandler, month, updateEvents }) => {
+const Header = ({ month, tooggleWeekHandler, updateEvents }) => {
   const [modalWindow, setModalWindow] = useState(false);
 
   const tooggleModalHandler = (e) => {
@@ -59,3 +60,9 @@ const Header = ({ tooggleWeekHandler, month, updateEvents }) => {
 };
 
 export default Header;
+
+Header.propTypes = {
+  month: PropTypes.string,
+  tooggleWeekHandler: PropTypes.func,
+  updateEvents: PropTypes.func,
+};

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 
 import Event from "../event/Event";
 import { formatMins } from "../../../src/utils/dateUtils.js";
 
-const Hour = ({ dataDay, dataHour, hourEvents, events, updateEvents }) => {
+const Hour = ({ events, updateEvents, dataDay, dataHour, hourEvents }) => {
   const [isLine, setLine] = useState();
   const [lineStyle, setLineStyle] = useState({
     marginTop: new Date().getMinutes() - 1,
@@ -58,3 +59,11 @@ const Hour = ({ dataDay, dataHour, hourEvents, events, updateEvents }) => {
 };
 
 export default Hour;
+
+Hour.propTypes = {
+  events: PropTypes.array,
+  updateEvents: PropTypes.func,
+  hourEvents: PropTypes.array,
+  dataDay: PropTypes.number,
+  dataHour: PropTypes.number,
+};

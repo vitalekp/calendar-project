@@ -1,18 +1,8 @@
 import React, { useState } from "react";
-import events from "../../gateway/events";
+import PropTypes from "prop-types";
 import moment from "moment";
 import { createEvent } from "../../gateway/eventsGateway";
-
 import "./modal.scss";
-
-// Read modal form & save event
-// algo
-// 1 взяти значення кожного інпуту
-// 2 перекинути events
-// 3 помістити значення в массив обєктів events
-// value="2018-07-22"
-// var dateComponent = date.utc().format('YYYY-MM-DD');
-// var timeComponent = date.utc().format('HH:mm:ss');
 
 const Modal = ({ tooggleModalHandler, updateEvents }) => {
   const [titleValue, setTitleValue] = useState("");
@@ -129,3 +119,8 @@ const Modal = ({ tooggleModalHandler, updateEvents }) => {
 };
 
 export default Modal;
+
+Modal.propTypes = {
+  tooggleModalHandler: PropTypes.func,
+  updateEvents: PropTypes.func,
+};

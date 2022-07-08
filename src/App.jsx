@@ -28,17 +28,6 @@ const App = () => {
     updateEvents();
   }, []);
 
-  // const fetchEvents = () => {
-  //   fetchEventsList().then((tasksList) => {
-  //     const tasks = tasksList.map((event) => {
-  //       event.dateFrom = new Date(event.dateFrom);
-  //       event.dateTo = new Date(event.dateTo);
-  //       return event;
-  //     });
-  //     setEvents(tasks);
-  //   });
-  // };
-
   const tooggleWeekHandler = (e) => {
     if (e.target.className === "navigation__today-btn button") {
       setWeekStartDate(new Date());
