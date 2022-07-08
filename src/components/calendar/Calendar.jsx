@@ -7,7 +7,7 @@ import Sidebar from "../sidebar/Sidebar";
 
 import "./calendar.scss";
 
-const Calendar = ({ events, weekDates, updateEvents }) => {
+const Calendar = ({ events, weekDates, updateEvents, tooggleModalHandler }) => {
   return (
     <section className="calendar">
       <Navigation weekDates={weekDates} />
@@ -18,6 +18,7 @@ const Calendar = ({ events, weekDates, updateEvents }) => {
             weekDates={weekDates}
             events={events}
             updateEvents={updateEvents}
+            tooggleModalHandler={tooggleModalHandler}
           />
         </div>
       </div>

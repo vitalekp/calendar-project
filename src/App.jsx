@@ -10,6 +10,22 @@ import { getWeekStartDate, generateWeekRange } from "../src/utils/dateUtils.js";
 import "./common.scss";
 
 const App = () => {
+  const [modalWindow, setModalWindow] = useState(false);
+
+  const tooggleModalHandler = (e) => {
+    if (e) {
+      e.preventDefault();
+
+      // animation
+      e.target.classList.remove("animate");
+      e.target.classList.add("animate");
+      setTimeout(function () {
+        e.target.classList.remove("animate");
+      }, 700);
+    }
+
+    setModalWindow(!modalWindow);
+  };
   const [weekStartDate, setWeekStartDate] = useState(new Date());
   const [events, setEvents] = useState([]);
 
@@ -59,11 +75,14 @@ const App = () => {
     <>
       <Header
         tooggleWeekHandler={tooggleWeekHandler}
+        tooggleModalHandler={tooggleModalHandler}
+        modalWindow={modalWindow}
         month={month}
         updateEvents={updateEvents}
       />
       <Calendar
         weekDates={weekDates}
+        tooggleModalHandler={tooggleModalHandler}
         events={events}
         updateEvents={updateEvents}
       />

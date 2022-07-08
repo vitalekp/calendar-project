@@ -4,24 +4,13 @@ import Modal from "../modal/Modal";
 
 import "./header.scss";
 
-const Header = ({ month, tooggleWeekHandler, updateEvents }) => {
-  const [modalWindow, setModalWindow] = useState(false);
-
-  const tooggleModalHandler = (e) => {
-    if (e) {
-      e.preventDefault();
-
-      // animation
-      e.target.classList.remove("animate");
-      e.target.classList.add("animate");
-      setTimeout(function () {
-        e.target.classList.remove("animate");
-      }, 700);
-    }
-
-    setModalWindow(!modalWindow);
-  };
-
+const Header = ({
+  month,
+  tooggleWeekHandler,
+  tooggleModalHandler,
+  modalWindow,
+  updateEvents,
+}) => {
   return (
     <header className="header">
       {modalWindow && (

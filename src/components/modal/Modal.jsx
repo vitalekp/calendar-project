@@ -12,11 +12,11 @@ const Modal = ({ tooggleModalHandler, updateEvents }) => {
   );
 
   const [startTimeValue, setStartTimeValue] = useState(
-    moment(new Date()).format("HH:mm")
+    moment(new Date()).format("HH:00")
   );
 
   const [endTimeValue, setEndTimeValue] = useState(
-    moment(new Date()).format("HH:mm")
+    moment(new Date().setHours(new Date().getHours() + 1)).format("HH:00")
   );
 
   const dateChangeHandler = (e) => {
@@ -42,6 +42,12 @@ const Modal = ({ tooggleModalHandler, updateEvents }) => {
     const [year, month, day] = dateValue.split("-");
     const [startHour, startMinute] = startTimeValue.split(":");
     const [endHour, endMinute] = endTimeValue.split(":");
+
+    if (startMinute % 15 !== 0 && endMinute % 15 !== 0) {
+      alert("Event timing must be a multiple of 15");
+      return null;
+    }
+
     const event = {
       title: titleValue,
       description: descriptionValue,

@@ -3,10 +3,22 @@ import PropTypes from "prop-types";
 import Day from "../day/Day";
 
 import "./week.scss";
+// algo
+// 1 найти ячейку
+// 2 добавити дані з ячейки у модальне вікно
+// 3 відкрити вікно
 
-const Week = ({ events, weekDates, updateEvents }) => {
+const Week = ({ events, weekDates, updateEvents, tooggleModalHandler }) => {
+  const createEEE = (e) => {
+    if (e.target.className === "calendar__time-slot") {
+      tooggleModalHandler();
+    }
+    console.log(e.nativeEvent.path[0].dataset.time);
+    console.log(e.nativeEvent.path[1].dataset.day);
+  };
+
   return (
-    <div className="calendar__week">
+    <div className="calendar__week" onClick={createEEE}>
       {weekDates.map((dayStart) => {
         const dayEnd = new Date(dayStart.getTime()).setHours(
           dayStart.getHours() + 24
