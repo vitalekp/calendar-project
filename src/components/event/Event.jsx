@@ -34,14 +34,14 @@ const Event = ({ height, marginTop, title, time, id, updateEvents }) => {
     <>
       {event.showEvent && (
         <>
-          {event.showBtn && (
-            <button className="delete-event-btn" onClick={deleteEventHandler}>
-              <i className="fas fa-trash-alt">Delete</i>
-            </button>
-          )}
           <div style={eventStyle} className="event" onClick={changeHandler}>
             <div className="event__title">{title}</div>
             <div className="event__time">{time}</div>
+            {event.showBtn && (
+              <button className="delete-event-btn" onClick={deleteEventHandler}>
+                <i className="fas fa-trash-alt">Delete</i>
+              </button>
+            )}
           </div>
         </>
       )}
