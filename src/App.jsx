@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import moment from "moment";
 import Header from "./components/header/Header.jsx";
 import Calendar from "./components/calendar/Calendar.jsx";
+import Modal from "./components/modal/Modal.jsx";
 
 import { fetchEventsList } from "./gateway/eventsGateway.js";
 
@@ -11,10 +12,33 @@ import "./common.scss";
 
 const App = () => {
   const [modalWindow, setModalWindow] = useState(false);
+  const [dateValue, setDateValue] = useState(
+    moment(new Date()).format("YYYY-MM-DD")
+  );
+
+  const [startTimeValue, setStartTimeValue] = useState(
+    moment(new Date()).format("HH:00")
+  );
+
+  const [endTimeValue, setEndTimeValue] = useState(
+    moment(new Date().setHours(new Date().getHours() + 1)).format("HH:00")
+  );
+
+  const dateChangeHandler = (e) => {
+    setDateValue(e.target.value);
+  };
+
+  const startTimeChangeHandler = (e) => {
+    setStartTimeValue(e.target.value);
+  };
+
+  const endTimeChangeHandler = (e) => {
+    setEndTimeValue(e.target.value);
+  };
 
   const tooggleModalHandler = (e) => {
     if (e) {
-      e.preventDefault();
+      e.preventDefault;
 
       // animation
       e.target.classList.remove("animate");
@@ -26,6 +50,13 @@ const App = () => {
 
     setModalWindow(!modalWindow);
   };
+
+  const setModalHandler = (day, startTime, endTime) => {
+    setDateValue(day);
+    setStartTimeValue(startTime);
+    setEndTimeValue(endTime);
+  };
+
   const [weekStartDate, setWeekStartDate] = useState(new Date());
   const [events, setEvents] = useState([]);
 
@@ -73,6 +104,18 @@ const App = () => {
 
   return (
     <>
+      {modalWindow && (
+        <Modal
+          tooggleModalHandler={tooggleModalHandler}
+          updateEvents={updateEvents}
+          dateValue={dateValue}
+          startTimeValue={startTimeValue}
+          endTimeValue={endTimeValue}
+          dateChangeHandler={dateChangeHandler}
+          startTimeChangeHandler={startTimeChangeHandler}
+          endTimeChangeHandler={endTimeChangeHandler}
+        />
+      )}
       <Header
         tooggleWeekHandler={tooggleWeekHandler}
         tooggleModalHandler={tooggleModalHandler}
@@ -83,6 +126,7 @@ const App = () => {
       <Calendar
         weekDates={weekDates}
         tooggleModalHandler={tooggleModalHandler}
+        setModalHandler={setModalHandler}
         events={events}
         updateEvents={updateEvents}
       />

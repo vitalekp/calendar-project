@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import Modal from "../modal/Modal";
+// import Modal from "../modal/Modal";
 
 import "./header.scss";
 
@@ -8,17 +8,17 @@ const Header = ({
   month,
   tooggleWeekHandler,
   tooggleModalHandler,
-  modalWindow,
-  updateEvents,
+  // modalWindow,
+  // updateEvents,
 }) => {
   return (
     <header className="header">
-      {modalWindow && (
+      {/* {modalWindow && (
         <Modal
           tooggleModalHandler={tooggleModalHandler}
           updateEvents={updateEvents}
         />
-      )}
+      )} */}
       <button className="button create-event-btn" onClick={tooggleModalHandler}>
         <i className="fas fa-plus create-event-btn__icon"></i>Create
       </button>

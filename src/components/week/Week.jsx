@@ -1,20 +1,32 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Day from "../day/Day";
+import moment from "moment";
 
 import "./week.scss";
-// algo
-// 1 найти ячейку
-// 2 добавити дані з ячейки у модальне вікно
-// 3 відкрити вікно
 
-const Week = ({ events, weekDates, updateEvents, tooggleModalHandler }) => {
+const Week = ({
+  events,
+  weekDates,
+  updateEvents,
+  tooggleModalHandler,
+  setModalHandler,
+}) => {
   const createEEE = (e) => {
     if (e.target.className === "calendar__time-slot") {
+      const time = e.nativeEvent.path[0].dataset.time;
+      const day =
+        e.nativeEvent.path[1].dataset.day.length === 1
+          ? "0" + e.nativeEvent.path[1].dataset.day
+          : e.nativeEvent.path[1].dataset.day;
+
+      const startDay = moment(new Date()).format(`YYYY-MM-${day}`);
+      const startTime = moment(new Date().setHours(time - 1)).format("HH:00");
+      const endTime = moment(new Date().setHours(time)).format("HH:00");
+
+      setModalHandler(startDay, startTime, endTime);
       tooggleModalHandler();
     }
-    console.log(e.nativeEvent.path[0].dataset.time);
-    console.log(e.nativeEvent.path[1].dataset.day);
   };
 
   return (
