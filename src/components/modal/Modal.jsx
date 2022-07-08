@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import events from "../../gateway/events";
 import moment from "moment";
-import { fetchEventsList } from "../../gateway/eventsGateway";
+import { createEvent } from "../../gateway/eventsGateway";
 
 import "./modal.scss";
 
@@ -47,7 +47,7 @@ const Modal = ({ tooggleModalHandler, updateEvents }) => {
       : setDescriptionValue(e.target.value);
   };
 
-  async function createEventHandler(e) {
+  const createEventHandler = async function (e) {
     e.preventDefault();
     const [year, month, day] = dateValue.split("-");
     const [startHour, startMinute] = startTimeValue.split(":");
@@ -58,17 +58,11 @@ const Modal = ({ tooggleModalHandler, updateEvents }) => {
       dateFrom: new Date(year, month - 1, day, startHour, startMinute),
       dateTo: new Date(year, month - 1, day, endHour, endMinute),
     };
-    tooggleModalHandler();
-    await fetch("https://62ac7a419fa81d00a7b2f6c1.mockapi.io/api/v1/events", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(event),
-    });
 
+    tooggleModalHandler();
+    await createEvent(event);
     await updateEvents();
-  }
+  };
 
   return (
     <div className="modal overlay">

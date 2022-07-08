@@ -14,8 +14,8 @@ const App = () => {
   const [events, setEvents] = useState([]);
 
   const updateEvents = () => {
-    fetchEventsList().then((tasksList) => {
-      const tasks = tasksList.map((event) => {
+    fetchEventsList().then((eventsList) => {
+      const tasks = eventsList.map((event) => {
         event.dateFrom = new Date(event.dateFrom);
         event.dateTo = new Date(event.dateTo);
         return event;
@@ -83,15 +83,3 @@ const App = () => {
 };
 
 export default App;
-
-// const str = "gs ha frddd";
-
-// const func = (text) => {
-//   let arr = text.split(" ");
-
-//   return arr.map((word) => word[0].toUpperCase() + word.slice(1)).join(" ");
-// };
-
-// const test = func(str);
-
-// console.log(test);

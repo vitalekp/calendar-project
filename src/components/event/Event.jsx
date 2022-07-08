@@ -1,18 +1,9 @@
 import React, { useState } from "react";
-import { fetchEventsList, deleteTask } from "../../gateway/eventsGateway";
+import { deleteTask } from "../../gateway/eventsGateway";
 
 import "./event.scss";
 
-const Event = ({
-  height,
-  marginTop,
-  title,
-  description,
-  time,
-  events,
-  id,
-  updateEvents,
-}) => {
+const Event = ({ height, marginTop, title, time, id, updateEvents }) => {
   const [event, setEvent] = useState({
     showBtn: false,
     showEvent: true,
@@ -51,7 +42,6 @@ const Event = ({
           <div style={eventStyle} className="event" onClick={changeHandler}>
             <div className="event__title">{title}</div>
             <div className="event__time">{time}</div>
-            <div className="event__description">{description}</div>
           </div>
         </>
       )}

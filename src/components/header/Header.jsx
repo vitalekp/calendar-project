@@ -6,15 +6,17 @@ import "./header.scss";
 const Header = ({ tooggleWeekHandler, month, updateEvents }) => {
   const [modalWindow, setModalWindow] = useState(false);
 
-  const tooggleModalHandler = () => {
-    // e.preventDefault;
+  const tooggleModalHandler = (e) => {
+    if (e) {
+      e.preventDefault();
 
-    // // animation
-    // e.target.classList.remove("animate");
-    // e.target.classList.add("animate");
-    // setTimeout(function () {
-    //   e.target.classList.remove("animate");
-    // }, 700);
+      // animation
+      e.target.classList.remove("animate");
+      e.target.classList.add("animate");
+      setTimeout(function () {
+        e.target.classList.remove("animate");
+      }, 700);
+    }
 
     setModalWindow(!modalWindow);
   };
