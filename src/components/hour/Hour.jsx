@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import Line from "../Line/Line";
 
+import "./hour.scss";
 import Event from "../event/Event";
 import { formatMins } from "../../../src/utils/dateUtils.js";
 
@@ -30,7 +32,7 @@ const Hour = ({ events, updateEvents, dataDay, dataHour, hourEvents }) => {
 
   return (
     <div className="calendar__time-slot" data-time={dataHour + 1}>
-      {isLine && <div className="red-line" style={lineStyle}></div>}
+      {isLine && <Line lineStyle={lineStyle} />}
       {/* if no events in the current hour nothing will render here */}
       {hourEvents.map(({ id, dateFrom, dateTo, title }) => {
         const eventStart = `${dateFrom.getHours()}:${formatMins(

@@ -39,4 +39,6 @@ Calendar.propTypes = {
   events: PropTypes.array,
   weekDates: PropTypes.array,
   updateEvents: PropTypes.func,
+  tooggleModalHandler: PropTypes.func,
+  setModalHandler: PropTypes.func,
 };

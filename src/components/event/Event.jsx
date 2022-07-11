@@ -81,4 +81,5 @@ Event.propTypes = {
   time: PropTypes.string,
   title: PropTypes.string,
   updateEvents: PropTypes.func,
+  dateFrom: PropTypes.object,
 };

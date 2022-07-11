@@ -65,6 +65,11 @@ const Modal = ({
       dateTo: new Date(year, month - 1, day, endHour, endMinute),
     };
 
+    if (event.dateFrom > event.dateTo) {
+      alert("Event cannot end earlier than it started");
+      return null;
+    }
+
     const diffTime = event.dateTo - event.dateFrom;
     const sixHours = 60 * 1000 * 60 * 6;
 
@@ -161,4 +166,11 @@ export default Modal;
 Modal.propTypes = {
   tooggleModalHandler: PropTypes.func,
   updateEvents: PropTypes.func,
+  dateValue: PropTypes.string,
+  startTimeValue: PropTypes.string,
+  endTimeValue: PropTypes.string,
+  dateChangeHandler: PropTypes.func,
+  startTimeChangeHandler: PropTypes.func,
+  endTimeChangeHandler: PropTypes.func,
+  events: PropTypes.array,
 };
