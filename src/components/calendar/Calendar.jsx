@@ -1,37 +1,29 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import Navigation from "./../navigation/Navigation";
-import Week from "../week/Week";
-import Sidebar from "../sidebar/Sidebar";
+import Navigation from '../navigation/Navigation';
+import Week from '../week/Week';
+import Sidebar from '../sidebar/Sidebar';
 
-import "./calendar.scss";
+import './calendar.scss';
 
-const Calendar = ({
-  events,
-  weekDates,
-  updateEvents,
-  tooggleModalHandler,
-  setModalHandler,
-}) => {
-  return (
-    <section className="calendar">
-      <Navigation weekDates={weekDates} />
-      <div className="calendar__body">
-        <div className="calendar__week-container">
-          <Sidebar />
-          <Week
-            weekDates={weekDates}
-            events={events}
-            updateEvents={updateEvents}
-            tooggleModalHandler={tooggleModalHandler}
-            setModalHandler={setModalHandler}
-          />
-        </div>
+const Calendar = ({ events, weekDates, updateEvents, tooggleModalHandler, setModalHandler }) => (
+  <section className="calendar">
+    <Navigation weekDates={weekDates} />
+    <div className="calendar__body">
+      <div className="calendar__week-container">
+        <Sidebar />
+        <Week
+          weekDates={weekDates}
+          events={events}
+          updateEvents={updateEvents}
+          tooggleModalHandler={tooggleModalHandler}
+          setModalHandler={setModalHandler}
+        />
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 export default Calendar;
 

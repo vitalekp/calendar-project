@@ -1,28 +1,22 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Day from "../day/Day";
-import moment from "moment";
+import React from 'react';
+import moment from 'moment';
+import PropTypes from 'prop-types';
+import Day from '../day/Day';
 
-import "./week.scss";
+import './week.scss';
 
-const Week = ({
-  events,
-  weekDates,
-  updateEvents,
-  tooggleModalHandler,
-  setModalHandler,
-}) => {
-  const createEventHandler = (e) => {
-    if (e.target.className === "calendar__time-slot") {
-      const time = e.nativeEvent.path[0].dataset.time;
+const Week = ({ events, weekDates, updateEvents, tooggleModalHandler, setModalHandler }) => {
+  const createEventHandler = e => {
+    if (e.target.className === 'calendar__time-slot') {
+      const { time } = e.nativeEvent.path[0].dataset;
       const day =
         e.nativeEvent.path[1].dataset.day.length === 1
-          ? "0" + e.nativeEvent.path[1].dataset.day
+          ? `0 + ${e.nativeEvent.path[1].dataset.day}`
           : e.nativeEvent.path[1].dataset.day;
 
       const startDay = moment(new Date()).format(`YYYY-MM-${day}`);
-      const startTime = moment(new Date().setHours(time - 1)).format("HH:00");
-      const endTime = moment(new Date().setHours(time)).format("HH:00");
+      const startTime = moment(new Date().setHours(time - 1)).format('HH:00');
+      const endTime = moment(new Date().setHours(time)).format('HH:00');
 
       setModalHandler(startDay, startTime, endTime);
       tooggleModalHandler();
@@ -31,13 +25,11 @@ const Week = ({
 
   return (
     <div className="calendar__week" onClick={createEventHandler}>
-      {weekDates.map((dayStart) => {
-        const dayEnd = new Date(dayStart.getTime()).setHours(
-          dayStart.getHours() + 24
-        );
+      {weekDates.map(dayStart => {
+        const dayEnd = new Date(dayStart.getTime()).setHours(dayStart.getHours() + 24);
 
         const dayEvents = events.filter(
-          (event) => event.dateFrom > dayStart && event.dateTo < dayEnd
+          event => event.dateFrom > dayStart && event.dateTo < dayEnd,
         );
 
         return (

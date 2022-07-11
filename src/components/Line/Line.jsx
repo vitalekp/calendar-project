@@ -1,8 +1,6 @@
-import React from "react";
-import "./line.scss";
+import React from 'react';
+import './line.scss';
 
-const Line = ({ lineStyle }) => {
-  return <div className="line" style={lineStyle}></div>;
-};
+const Line = ({ lineStyle }) => <div className="line" style={lineStyle}></div>;
 
 export default Line;

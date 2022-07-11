@@ -1,18 +1,10 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { deleteTask } from "../../gateway/eventsGateway";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { deleteTask } from '../../gateway/eventsGateway';
 
-import "./event.scss";
+import './event.scss';
 
-const Event = ({
-  height,
-  marginTop,
-  title,
-  time,
-  dateFrom,
-  id,
-  updateEvents,
-}) => {
+const Event = ({ height, marginTop, title, time, dateFrom, id, updateEvents }) => {
   const [event, setEvent] = useState({
     showBtn: false,
     showEvent: true,
@@ -24,7 +16,7 @@ const Event = ({
     });
   };
 
-  const deleteEventHandler = (e) => {
+  const deleteEventHandler = e => {
     e.stopPropagation();
     const fifteenMinutes = -60 * 1000 * 15;
     const diffTime = new Date() - dateFrom;
@@ -34,9 +26,7 @@ const Event = ({
         showBtn: !event.showBtn,
         showEvent: true,
       });
-      alert(
-        "You cannot delete the event earlier than 15 minutes before the start"
-      );
+      alert('You cannot delete the event earlier than 15 minutes before the start');
       return null;
     }
 
@@ -47,6 +37,7 @@ const Event = ({
 
     deleteTask(id);
     updateEvents();
+    return null;
   };
 
   const eventStyle = {

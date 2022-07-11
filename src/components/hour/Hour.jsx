@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import Line from "../line/Line";
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import Line from '../line/Line';
 
-import "./hour.scss";
-import Event from "../event/Event";
-import { formatMins } from "../../../src/utils/dateUtils.js";
+import './hour.scss';
+import Event from '../event/Event';
+import { formatMins } from '../../utils/dateUtils.js';
 
 const Hour = ({ events, updateEvents, dataDay, dataHour, hourEvents }) => {
   const [isLine, setLine] = useState();
@@ -34,12 +34,8 @@ const Hour = ({ events, updateEvents, dataDay, dataHour, hourEvents }) => {
     <div className="calendar__time-slot" data-time={dataHour + 1}>
       {isLine && <Line lineStyle={lineStyle} />}
       {hourEvents.map(({ id, dateFrom, dateTo, title }) => {
-        const eventStart = `${dateFrom.getHours()}:${formatMins(
-          dateFrom.getMinutes()
-        )}`;
-        const eventEnd = `${dateTo.getHours()}:${formatMins(
-          dateTo.getMinutes()
-        )}`;
+        const eventStart = `${dateFrom.getHours()}:${formatMins(dateFrom.getMinutes())}`;
+        const eventEnd = `${dateTo.getHours()}:${formatMins(dateTo.getMinutes())}`;
 
         return (
           <Event

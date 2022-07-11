@@ -1,48 +1,44 @@
-import React, { useEffect, useState } from "react";
-import moment from "moment";
-import Header from "./components/header/Header.jsx";
-import Calendar from "./components/calendar/Calendar.jsx";
-import Modal from "./components/modal/Modal.jsx";
+import React, { useEffect, useState } from 'react';
+import moment from 'moment';
+import Header from './components/header/Header.jsx';
+import Calendar from './components/calendar/Calendar.jsx';
+import Modal from './components/modal/Modal.jsx';
 
-import { fetchEventsList } from "./gateway/eventsGateway.js";
-import { getWeekStartDate, generateWeekRange } from "../src/utils/dateUtils.js";
+import { fetchEventsList } from './gateway/eventsGateway.js';
+import { getWeekStartDate, generateWeekRange } from './utils/dateUtils.js';
 
-import "./common.scss";
+import './styles/common.scss';
 
 const App = () => {
   const [modalWindow, setModalWindow] = useState(false);
-  const [dateValue, setDateValue] = useState(
-    moment(new Date()).format("YYYY-MM-DD")
-  );
+  const [dateValue, setDateValue] = useState(moment(new Date()).format('YYYY-MM-DD'));
 
-  const [startTimeValue, setStartTimeValue] = useState(
-    moment(new Date()).format("HH:00")
-  );
+  const [startTimeValue, setStartTimeValue] = useState(moment(new Date()).format('HH:00'));
 
   const [endTimeValue, setEndTimeValue] = useState(
-    moment(new Date().setHours(new Date().getHours() + 1)).format("HH:00")
+    moment(new Date().setHours(new Date().getHours() + 1)).format('HH:00'),
   );
 
-  const dateChangeHandler = (e) => {
+  const dateChangeHandler = e => {
     setDateValue(e.target.value);
   };
 
-  const startTimeChangeHandler = (e) => {
+  const startTimeChangeHandler = e => {
     setStartTimeValue(e.target.value);
   };
 
-  const endTimeChangeHandler = (e) => {
+  const endTimeChangeHandler = e => {
     setEndTimeValue(e.target.value);
   };
 
-  const tooggleModalHandler = (e) => {
+  const tooggleModalHandler = e => {
     if (e) {
-      e.preventDefault;
+      e.preventDefault();
 
-      e.target.classList.remove("animate");
-      e.target.classList.add("animate");
-      setTimeout(function () {
-        e.target.classList.remove("animate");
+      e.target.classList.remove('animate');
+      e.target.classList.add('animate');
+      setTimeout(() => {
+        e.target.classList.remove('animate');
       }, 700);
     }
 
@@ -59,13 +55,15 @@ const App = () => {
   const [events, setEvents] = useState([]);
 
   const updateEvents = () => {
-    fetchEventsList().then((eventsList) => {
-      const tasks = eventsList.map((event) => {
-        event.dateFrom = new Date(event.dateFrom);
-        event.dateTo = new Date(event.dateTo);
-        return event;
-      });
-      setEvents(tasks);
+    fetchEventsList().then(eventsList => {
+      const updateEventsList = eventsList.map(({ id, description, title, dateFrom, dateTo }) => ({
+        id,
+        description,
+        title,
+        dateFrom: new Date(dateFrom),
+        dateTo: new Date(dateTo),
+      }));
+      setEvents(updateEventsList);
     });
   };
 
@@ -73,8 +71,8 @@ const App = () => {
     updateEvents();
   }, []);
 
-  const tooggleWeekHandler = (e) => {
-    if (e.target.className === "navigation__today-btn button") {
+  const tooggleWeekHandler = e => {
+    if (e.target.className === 'navigation__today-btn button') {
       setWeekStartDate(new Date());
       return;
     }
@@ -95,10 +93,8 @@ const App = () => {
 
   const month =
     weekDates[0].getMonth() === weekDates[6].getMonth()
-      ? moment(weekDates[0]).format("MMMM")
-      : `${moment(weekDates[0]).format("MMMM")} - ${moment(weekDates[6]).format(
-          "MMMM"
-        )}`;
+      ? moment(weekDates[0]).format('MMMM')
+      : `${moment(weekDates[0]).format('MMMM')} - ${moment(weekDates[6]).format('MMMM')}`;
 
   return (
     <>

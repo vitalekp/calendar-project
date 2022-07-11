@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { createEvent } from "../../gateway/eventsGateway";
-import "./modal.scss";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { createEvent } from '../../gateway/eventsGateway';
+import './modal.scss';
 
 const Modal = ({
   tooggleModalHandler,
@@ -14,23 +14,20 @@ const Modal = ({
   endTimeChangeHandler,
   events,
 }) => {
-  const [titleValue, setTitleValue] = useState("");
-  const [descriptionValue, setDescriptionValue] = useState("");
+  const [titleValue, setTitleValue] = useState('');
+  const [descriptionValue, setDescriptionValue] = useState('');
 
-  const changeValueHandler = (e) => {
-    e.target.name === "title"
-      ? setTitleValue(e.target.value)
-      : setDescriptionValue(e.target.value);
-  };
+  const changeValueHandler = e =>
+    e.target.name === 'title' ? setTitleValue(e.target.value) : setDescriptionValue(e.target.value);
 
-  const createEventHandler = async function (e) {
+  async function createEventHandler(e) {
     e.preventDefault();
-    const [year, month, day] = dateValue.split("-");
-    const [startHour, startMinute] = startTimeValue.split(":");
-    const [endHour, endMinute] = endTimeValue.split(":");
+    const [year, month, day] = dateValue.split('-');
+    const [startHour, startMinute] = startTimeValue.split(':');
+    const [endHour, endMinute] = endTimeValue.split(':');
 
     if (startMinute % 15 !== 0 && endMinute % 15 !== 0) {
-      alert("Event timing must be a multiple of 15");
+      alert('Event timing must be a multiple of 15');
       return null;
     }
 
@@ -42,7 +39,7 @@ const Modal = ({
     };
 
     if (event.dateFrom > event.dateTo) {
-      alert("Event cannot end earlier than it started");
+      alert('Event cannot end earlier than it started');
       return null;
     }
 
@@ -50,37 +47,36 @@ const Modal = ({
     const sixHours = 60 * 1000 * 60 * 6;
 
     if (diffTime > sixHours) {
-      alert("One event cannot be longer than 6 hours");
+      alert('One event cannot be longer than 6 hours');
       return null;
     }
 
-    const timeCrossing = events.some((ev) => {
+    const timeCrossing = events.some(ev => {
       if (ev.dateFrom < event.dateFrom && ev.dateTo > event.dateFrom) {
         return true;
       }
       if (ev.dateFrom > event.dateFrom && ev.dateFrom < event.dateTo) {
         return true;
       }
+      return false;
     });
 
     if (timeCrossing) {
-      alert("Two events cannot overlap in time");
+      alert('Two events cannot overlap in time');
       return null;
     }
 
     tooggleModalHandler();
     await createEvent(event);
     await updateEvents();
-  };
+    return null;
+  }
 
   return (
     <div className="modal overlay">
       <div className="modal__content">
         <div className="create-event">
-          <button
-            className="create-event__close-btn"
-            onClick={tooggleModalHandler}
-          >
+          <button className="create-event__close-btn" onClick={tooggleModalHandler}>
             +
           </button>
           <form className="event-form">
@@ -123,11 +119,7 @@ const Modal = ({
               value={descriptionValue}
               onChange={changeValueHandler}
             />
-            <button
-              type="submit"
-              className="event-form__submit-btn"
-              onClick={createEventHandler}
-            >
+            <button type="submit" className="event-form__submit-btn" onClick={createEventHandler}>
               Create
             </button>
           </form>
