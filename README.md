@@ -15,8 +15,6 @@
 
 - `npm start` - to start project
 - `npm run build` - to build production
-- `npm run test` - tests with jest
-- `npm run line` - check syntacks with eslint
 
 ## Author
 
