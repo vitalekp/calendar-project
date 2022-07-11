@@ -51,6 +51,7 @@ const Hour = ({ events, updateEvents, dataDay, dataHour, hourEvents }) => {
             title={title}
             events={events}
             updateEvents={updateEvents}
+            dateFrom={dateFrom}
           />
         );
       })}

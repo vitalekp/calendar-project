@@ -4,7 +4,15 @@ import { deleteTask } from "../../gateway/eventsGateway";
 
 import "./event.scss";
 
-const Event = ({ height, marginTop, title, time, id, updateEvents }) => {
+const Event = ({
+  height,
+  marginTop,
+  title,
+  time,
+  dateFrom,
+  id,
+  updateEvents,
+}) => {
   const [event, setEvent] = useState({
     showBtn: false,
     showEvent: true,
@@ -16,7 +24,20 @@ const Event = ({ height, marginTop, title, time, id, updateEvents }) => {
     });
   };
 
-  const deleteEventHandler = () => {
+  const deleteEventHandler = (e) => {
+    e.stopPropagation();
+    const fifteenMinutes = -60 * 1000 * 15;
+    const diffTime = new Date() - dateFrom;
+
+    if (diffTime < fifteenMinutes) {
+      setEvent({
+        showBtn: !event.showBtn,
+        showEvent: true,
+      });
+      alert("You cannot delete the event 15 minutes before the start");
+      return null;
+    }
+
     setEvent({
       showBtn: false,
       showEvent: false,
