@@ -12,7 +12,7 @@ const Week = ({
   tooggleModalHandler,
   setModalHandler,
 }) => {
-  const createEEE = (e) => {
+  const createEventHandler = (e) => {
     if (e.target.className === "calendar__time-slot") {
       const time = e.nativeEvent.path[0].dataset.time;
       const day =
@@ -30,13 +30,12 @@ const Week = ({
   };
 
   return (
-    <div className="calendar__week" onClick={createEEE}>
+    <div className="calendar__week" onClick={createEventHandler}>
       {weekDates.map((dayStart) => {
         const dayEnd = new Date(dayStart.getTime()).setHours(
           dayStart.getHours() + 24
         );
 
-        //getting all events from the day we will render
         const dayEvents = events.filter(
           (event) => event.dateFrom > dayStart && event.dateTo < dayEnd
         );

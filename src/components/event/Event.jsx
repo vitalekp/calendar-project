@@ -34,7 +34,9 @@ const Event = ({
         showBtn: !event.showBtn,
         showEvent: true,
       });
-      alert("You cannot delete the event 15 minutes before the start");
+      alert(
+        "You cannot delete the event earlier than 15 minutes before the start"
+      );
       return null;
     }
 
@@ -52,14 +54,16 @@ const Event = ({
     marginTop,
   };
 
+  const { showEvent, showBtn } = event;
+
   return (
     <>
-      {event.showEvent && (
+      {showEvent && (
         <>
           <div style={eventStyle} className="event" onClick={changeHandler}>
             <div className="event__title">{title}</div>
             <div className="event__time">{time}</div>
-            {event.showBtn && (
+            {showBtn && (
               <button className="delete-event-btn" onClick={deleteEventHandler}>
                 <i className="fas fa-trash-alt">Delete</i>
               </button>

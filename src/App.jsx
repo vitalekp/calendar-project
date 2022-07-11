@@ -5,7 +5,6 @@ import Calendar from "./components/calendar/Calendar.jsx";
 import Modal from "./components/modal/Modal.jsx";
 
 import { fetchEventsList } from "./gateway/eventsGateway.js";
-
 import { getWeekStartDate, generateWeekRange } from "../src/utils/dateUtils.js";
 
 import "./common.scss";
@@ -40,7 +39,6 @@ const App = () => {
     if (e) {
       e.preventDefault;
 
-      // animation
       e.target.classList.remove("animate");
       e.target.classList.add("animate");
       setTimeout(function () {

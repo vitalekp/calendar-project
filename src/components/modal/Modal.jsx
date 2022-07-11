@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import moment from "moment";
 import { createEvent } from "../../gateway/eventsGateway";
 import "./modal.scss";
 
@@ -17,29 +16,6 @@ const Modal = ({
 }) => {
   const [titleValue, setTitleValue] = useState("");
   const [descriptionValue, setDescriptionValue] = useState("");
-  // const [dateValue, setDateValue] = useState(
-  //   moment(new Date()).format("YYYY-MM-DD")
-  // );
-
-  // const [startTimeValue, setStartTimeValue] = useState(
-  //   moment(new Date()).format("HH:00")
-  // );
-
-  // const [endTimeValue, setEndTimeValue] = useState(
-  //   moment(new Date().setHours(new Date().getHours() + 1)).format("HH:00")
-  // );
-
-  // const dateChangeHandler = (e) => {
-  //   setDateValue(e.target.value);
-  // };
-
-  // const startTimeChangeHandler = (e) => {
-  //   setStartTimeValue(e.target.value);
-  // };
-
-  // const endTimeChangeHandler = (e) => {
-  //   setEndTimeValue(e.target.value);
-  // };
 
   const changeValueHandler = (e) => {
     e.target.name === "title"

@@ -12,7 +12,6 @@ const Day = ({ events, updateEvents, dataDay, dayEvents }) => {
   return (
     <div className="calendar__day" data-day={dataDay}>
       {hours.map((hour) => {
-        //getting all events from the day we will render
         const hourEvents = dayEvents.filter(
           (event) => event.dateFrom.getHours() === hour
         );

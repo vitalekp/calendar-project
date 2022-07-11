@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import Line from "../Line/Line";
+import Line from "../line/Line";
 
 import "./hour.scss";
 import Event from "../event/Event";
@@ -33,7 +33,6 @@ const Hour = ({ events, updateEvents, dataDay, dataHour, hourEvents }) => {
   return (
     <div className="calendar__time-slot" data-time={dataHour + 1}>
       {isLine && <Line lineStyle={lineStyle} />}
-      {/* if no events in the current hour nothing will render here */}
       {hourEvents.map(({ id, dateFrom, dateTo, title }) => {
         const eventStart = `${dateFrom.getHours()}:${formatMins(
           dateFrom.getMinutes()
@@ -46,7 +45,6 @@ const Hour = ({ events, updateEvents, dataDay, dataHour, hourEvents }) => {
           <Event
             key={id}
             id={id}
-            //calculating event height = duration of event in minutes
             height={(dateTo.getTime() - dateFrom.getTime()) / (1000 * 60)}
             marginTop={dateFrom.getMinutes()}
             time={`${eventStart} - ${eventEnd}`}
