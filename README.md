@@ -6,11 +6,12 @@ Layout supports desktop version
 
 ## The tech stack is:
 
-- [HTML5](https://en.wikipedia.org/wiki/HTML5)
-- [CSS3](https://en.wikipedia.org/wiki/CSS)
-- [Flexbox](https://en.wikipedia.org/wiki/CSS_Flexible_Box_Layout)
+- [React]
+- [React Hooks]
+- [JS (ES6)]
 - [Sass (Scss)](https://sass-lang.com/)
-- [BEM methodology](https://en.bem.info/methodology/)
+- [Webpack](https://en.bem.info/methodology/)
+- [Webpack](https://en.bem.info/methodology/)
 
 ## Author
 
