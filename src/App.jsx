@@ -114,6 +114,7 @@ const App = () => {
           dateChangeHandler={dateChangeHandler}
           startTimeChangeHandler={startTimeChangeHandler}
           endTimeChangeHandler={endTimeChangeHandler}
+          events={events}
         />
       )}
       <Header

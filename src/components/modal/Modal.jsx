@@ -13,6 +13,7 @@ const Modal = ({
   dateChangeHandler,
   startTimeChangeHandler,
   endTimeChangeHandler,
+  events,
 }) => {
   const [titleValue, setTitleValue] = useState("");
   const [descriptionValue, setDescriptionValue] = useState("");
@@ -63,6 +64,28 @@ const Modal = ({
       dateFrom: new Date(year, month - 1, day, startHour, startMinute),
       dateTo: new Date(year, month - 1, day, endHour, endMinute),
     };
+
+    const diffTime = event.dateTo - event.dateFrom;
+    const sixHours = 60 * 1000 * 60 * 6;
+
+    if (diffTime > sixHours) {
+      alert("One event cannot be longer than 6 hours");
+      return null;
+    }
+
+    const timeCrossing = events.some((ev) => {
+      if (ev.dateFrom < event.dateFrom && ev.dateTo > event.dateFrom) {
+        return true;
+      }
+      if (ev.dateFrom > event.dateFrom && ev.dateFrom < event.dateTo) {
+        return true;
+      }
+    });
+
+    if (timeCrossing) {
+      alert("Two events cannot overlap in time");
+      return null;
+    }
 
     tooggleModalHandler();
     await createEvent(event);

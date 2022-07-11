@@ -2,10 +2,10 @@
   position: absolute;
   width: 80%;
   background-color: #6495ed;
-  z-index: 1;
   border-radius: 8px;
   padding: 8px;
   color: #fff;
+  z-index: 1;
 
   &__title {
     width: 100%;
@@ -26,6 +26,7 @@
 }
 
 .delete-event-btn {
+  z-index: 10;
   position: absolute;
   bottom: -30px;
   right: -10px;
