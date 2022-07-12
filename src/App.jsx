@@ -34,7 +34,6 @@ const App = () => {
   const tooggleModalHandler = e => {
     if (e) {
       e.preventDefault();
-
       e.target.classList.remove('animate');
       e.target.classList.add('animate');
       setTimeout(() => {

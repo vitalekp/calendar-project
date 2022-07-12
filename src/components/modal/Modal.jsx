@@ -53,10 +53,10 @@ const Modal = ({
     }
 
     const timeCrossing = events.some(ev => {
-      if (ev.dateFrom < event.dateFrom && ev.dateTo > event.dateFrom) {
+      if (ev.dateFrom <= event.dateFrom && ev.dateTo >= event.dateFrom) {
         return true;
       }
-      if (ev.dateFrom > event.dateFrom && ev.dateFrom < event.dateTo) {
+      if (ev.dateFrom >= event.dateFrom && ev.dateFrom <= event.dateTo) {
         return true;
       }
       return false;
