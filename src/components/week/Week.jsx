@@ -9,12 +9,10 @@ const Week = ({ events, weekDates, updateEvents, tooggleModalHandler, setModalHa
   const createEventHandler = e => {
     if (e.target.className === 'calendar__time-slot') {
       const { time } = e.nativeEvent.path[0].dataset;
-      const day =
-        e.nativeEvent.path[1].dataset.day.length === 1
-          ? `0 + ${e.nativeEvent.path[1].dataset.day}`
-          : e.nativeEvent.path[1].dataset.day;
+      const { day } = e.nativeEvent.path[1].dataset;
+      const currentDay = day.length === 1 ? `0 + ${day}` : day;
 
-      const startDay = moment(new Date()).format(`YYYY-MM-${day}`);
+      const startDay = moment(new Date()).format(`YYYY-MM-${currentDay}`);
       const startTime = moment(new Date().setHours(time - 1)).format('HH:00');
       const endTime = moment(new Date().setHours(time)).format('HH:00');
 

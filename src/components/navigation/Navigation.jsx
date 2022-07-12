@@ -21,7 +21,7 @@ const Navigation = ({ weekDates }) => (
               backgroundColor: '#08284f',
               borderRadius: '90%',
               color: '#fff',
-              width: '25px',
+              width: '35px',
               textAlign: 'center',
             }
           : { backgroundColor: 'none' };

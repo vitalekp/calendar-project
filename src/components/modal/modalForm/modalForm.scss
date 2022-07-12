@@ -1,0 +1,21 @@
+.event-form {
+  display: flex;
+  flex-direction: column;
+
+  &__field {
+    margin: 8px;
+    border: none;
+  }
+
+  &__submit-btn {
+    margin: 8px;
+    margin-left: auto;
+    border: none;
+    color: #fff;
+    background-color: cornflowerblue;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+}
