@@ -5,7 +5,8 @@
   "scripts": {
     "start": "webpack serve --mode=development --devtool source-map",
     "build": "webpack --mode=production",
-    "lint": "eslint . --ext .js,.jsx"
+    "lint": "eslint . --ext .js,.jsx",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
