@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Line from '../line/Line';
-
-import './hour.scss';
 import Event from '../event/Event';
 import { formatMins } from '../../utils/dateUtils.js';
+import './hour.scss';
 
 const Hour = ({ events, updateEvents, dataDay, dataHour, hourEvents }) => {
   const [isLine, setLine] = useState();

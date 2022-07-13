@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { deleteTask } from '../../gateway/eventsGateway';
-
+import { fetchDeleteTask } from '../../gateway/eventsGateway';
 import './event.scss';
+import { checkDeleteEvent } from '../../сheckValidation/сheckValidation';
 
 const Event = ({ height, marginTop, title, time, dateFrom, id, updateEvents }) => {
   const [event, setEvent] = useState({
@@ -18,16 +18,14 @@ const Event = ({ height, marginTop, title, time, dateFrom, id, updateEvents }) =
 
   const deleteEventHandler = e => {
     e.stopPropagation();
-    const fifteenMinutes = -60 * 1000 * 15;
     const diffTime = new Date() - dateFrom;
 
-    if (diffTime < fifteenMinutes) {
+    if (checkDeleteEvent(diffTime)) {
       setEvent({
         showBtn: !event.showBtn,
         showEvent: true,
       });
-      alert('You cannot delete the event earlier than 15 minutes before the start');
-      return null;
+      return;
     }
 
     setEvent({
@@ -35,9 +33,8 @@ const Event = ({ height, marginTop, title, time, dateFrom, id, updateEvents }) =
       showEvent: false,
     });
 
-    deleteTask(id);
+    fetchDeleteTask(id);
     updateEvents();
-    return null;
   };
 
   const eventStyle = {

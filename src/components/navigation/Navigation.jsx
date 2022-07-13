@@ -5,26 +5,24 @@ import { days } from '../../utils/dateUtils.js';
 const Navigation = ({ weekDates }) => (
   <header className="calendar__header">
     {weekDates.map(dayDate => {
-      const currentDay = new Date().getDate();
+      const isCurrentDay = new Date().getDate() === dayDate.getDate();
 
-      const dayNameStyles =
-        currentDay === dayDate.getDate()
-          ? {
-              fontWeight: '700',
-              color: '#08284f',
-            }
-          : { backgroundColor: 'none' };
+      const dayNameStyles = isCurrentDay
+        ? {
+            fontWeight: '700',
+            color: '#005bff',
+          }
+        : null;
 
-      const dayNumberStyles =
-        currentDay === dayDate.getDate()
-          ? {
-              backgroundColor: '#08284f',
-              borderRadius: '90%',
-              color: '#fff',
-              width: '35px',
-              textAlign: 'center',
-            }
-          : { backgroundColor: 'none' };
+      const dayNumberStyles = isCurrentDay
+        ? {
+            backgroundColor: 'rgba(100, 149, 237, 0.15)',
+            borderRadius: '90%',
+            color: '#005bff',
+            width: '35px',
+            textAlign: 'center',
+          }
+        : null;
 
       return (
         <div key={dayDate} className="calendar__day-label day-label">

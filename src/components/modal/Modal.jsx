@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { createEvent } from '../../gateway/eventsGateway';
+import { fetchCreateEvent } from '../../gateway/eventsGateway';
 import './modal.scss';
 import ModalForm from './modalForm/ModalForm';
+import {
+  checkEventDuration,
+  checkEventStart,
+  checkEventTimeCrossing,
+  checkEventTiming,
+} from '../../сheckValidation/сheckValidation';
 
 const Modal = ({
   tooggleModalHandler,
@@ -21,15 +27,14 @@ const Modal = ({
   const changeValueHandler = e =>
     e.target.name === 'title' ? setTitleValue(e.target.value) : setDescriptionValue(e.target.value);
 
-  async function createEventHandler(e) {
+  const createEventHandler = async e => {
     e.preventDefault();
     const [year, month, day] = dateValue.split('-');
     const [startHour, startMinute] = startTimeValue.split(':');
     const [endHour, endMinute] = endTimeValue.split(':');
 
-    if (startMinute % 15 !== 0 && endMinute % 15 !== 0) {
-      alert('Event timing must be a multiple of 15');
-      return null;
+    if (checkEventTiming(startMinute, endMinute)) {
+      return false;
     }
 
     const event = {
@@ -38,40 +43,27 @@ const Modal = ({
       dateFrom: new Date(year, month - 1, day, startHour, startMinute),
       dateTo: new Date(year, month - 1, day, endHour, endMinute),
     };
+    const { dateFrom, dateTo } = event;
 
-    if (event.dateFrom > event.dateTo) {
-      alert('Event cannot end earlier than it started');
-      return null;
-    }
-
-    const diffTime = event.dateTo - event.dateFrom;
-    const sixHours = 60 * 1000 * 60 * 6;
-
-    if (diffTime > sixHours) {
-      alert('One event cannot be longer than 6 hours');
-      return null;
-    }
-
-    const timeCrossing = events.some(ev => {
-      if (ev.dateFrom <= event.dateFrom && ev.dateTo >= event.dateFrom) {
-        return true;
-      }
-      if (ev.dateFrom >= event.dateFrom && ev.dateFrom <= event.dateTo) {
-        return true;
-      }
+    if (checkEventStart(dateFrom, dateTo)) {
       return false;
-    });
+    }
 
-    if (timeCrossing) {
-      alert('Two events cannot overlap in time');
-      return null;
+    const diffTime = dateTo - dateFrom;
+
+    if (checkEventDuration(diffTime)) {
+      return false;
+    }
+
+    if (checkEventTimeCrossing(events, event)) {
+      return false;
     }
 
     tooggleModalHandler();
-    await createEvent(event);
+    await fetchCreateEvent(event);
     await updateEvents();
-    return null;
-  }
+    return true;
+  };
 
   return (
     <div className="modal overlay">

@@ -8,7 +8,7 @@ export const fetchEventsList = () =>
     return response.json();
   });
 
-export const createEvent = eventData =>
+export const fetchCreateEvent = eventData =>
   fetch(baseUrl, {
     method: 'POST',
     headers: {
@@ -21,7 +21,7 @@ export const createEvent = eventData =>
     }
   });
 
-export const deleteTask = eventId =>
+export const fetchDeleteTask = eventId =>
   fetch(`${baseUrl}/${eventId}`, {
     method: 'DELETE',
   }).then(response => {
